@@ -330,6 +330,100 @@ img,svg,canvas,video{max-width:100%}
   #app>.c h2{font-size:19px}
 }
 
+/* ALEXOR · rediseño móvil unificado: aire, jerarquía y zona libre para Netlify */
+@media(max-width:700px){
+  :root{--mobile-safe:52px}
+  html,body{width:100%;min-width:320px;max-width:100%;height:100%;overflow:hidden}
+  body{font-size:15px;line-height:1.45}
+  #app{
+    width:100%;max-width:100%;height:calc(100dvh - var(--mobile-safe));
+    min-height:0;margin:0;overflow:hidden;box-sizing:border-box;
+    display:flex;flex-direction:column;
+  }
+  #hud{flex:0 0 auto;padding:12px 15px;border-radius:0 0 18px 18px}
+  #hud b{font-size:17px}
+  #hr b{font-size:21px}
+  #mid{
+    flex:1 1 auto;min-height:0;width:100%;max-width:100%;
+    box-sizing:border-box;padding:14px 13px 20px;gap:13px;
+    overflow:auto;overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+  }
+  .c{
+    flex:1 1 auto;min-height:0;width:100%;height:auto;max-width:100%;
+    box-sizing:border-box;padding:18px 14px 24px;gap:14px;
+    overflow:auto;overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+  }
+  h1{font-size:clamp(27px,7vw,34px);line-height:1.12}
+  h2{font-size:21px;line-height:1.2;margin:4px 0 8px}
+  p{line-height:1.5}
+  .card,.hero,.cl{box-sizing:border-box;max-width:100%;padding:14px;border-radius:16px}
+  .row{gap:10px;align-items:stretch;flex-wrap:wrap}
+  .row>*{min-width:0}
+  button{min-height:44px;padding:10px 13px;font-size:14px}
+  input,select,textarea{min-height:42px;font-size:16px}
+  .g{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .g div{padding:12px 8px;border-radius:13px}
+  .g b{font-size:22px}
+  .tabs{display:flex;flex-wrap:nowrap;gap:7px;max-width:100%;overflow-x:auto;padding:3px;scrollbar-width:thin}
+  .tabs button{flex:0 0 auto;min-width:max-content;padding:10px 13px}
+  table{display:block;width:max-content;min-width:100%;max-width:none;overflow-x:auto;white-space:nowrap}
+  #bar{
+    position:fixed;z-index:30;left:0;right:0;bottom:var(--mobile-safe);
+    width:100%;max-width:100%;box-sizing:border-box;
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+    gap:7px;padding:8px 10px;
+    border:0;border-top:1px solid var(--bd);border-radius:16px 16px 0 0;
+    background:var(--cd);box-shadow:0 -4px 16px rgba(0,0,0,.18);
+  }
+  #bar>div{display:flex;flex:0 1 auto;min-width:0;max-width:100%;flex-wrap:nowrap;gap:6px;justify-content:center}
+  #bar button{min-height:40px;padding:8px 10px;font-size:13px;white-space:nowrap}
+  #bar:has(.dk){flex-wrap:nowrap;justify-content:space-between;gap:5px}
+  #bar:has(.dk) .dk{
+    display:flex;flex:1 1 auto;min-width:0;max-width:calc(100% - 86px);
+    overflow-x:auto;overflow-y:hidden;flex-wrap:nowrap;justify-content:flex-start;
+    gap:3px;scrollbar-width:thin;-webkit-overflow-scrolling:touch;
+  }
+  #bar:has(.dk) .dk button{flex:0 0 auto;min-width:40px;padding:8px 10px!important;font-size:12px!important}
+  #bar:has(.dk) .ct{flex:0 0 auto;gap:3px}
+  #bar:has(.dk) .ct button{padding:7px 8px!important}
+  body::after{
+    content:"";position:fixed;z-index:29;left:0;right:0;bottom:0;
+    height:var(--mobile-safe);background:#000;pointer-events:none;
+  }
+  #ov{z-index:40;padding:env(safe-area-inset-top,0px) 0 var(--mobile-safe)}
+  #ov>div{width:100%;max-width:100%;max-height:calc(100dvh - var(--mobile-safe) - 12px);box-sizing:border-box;overflow:auto}
+  #mp{max-width:calc(100vw - 24px);max-height:65dvh;overflow:auto}
+  .apps{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 8px;padding:18px 10px}
+  .app{font-size:11px}
+  .app i{width:54px;height:54px}
+  .pitch{height:clamp(260px,78vw,360px)}
+  .pf{height:clamp(130px,42vw,165px)}
+  .ph-w{width:100%;max-width:100vw;max-height:calc(100dvh - var(--mobile-safe) - 12px)}
+  .ph-b{overflow:auto;min-width:0}
+  .pr-wall{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:380px){
+  #mid{padding-left:10px;padding-right:10px}
+  .c{padding-left:11px;padding-right:11px}
+  #bar{gap:5px;padding:7px 6px}
+  #bar>div{gap:4px}
+  #bar button{padding:7px 8px;font-size:12px}
+  #bar:has(.dk) .dk{max-width:calc(100% - 76px)}
+  #bar:has(.dk) .dk button{min-width:36px;padding:7px 8px!important}
+  .apps{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(orientation:landscape) and (max-height:520px) and (max-width:900px){
+  :root{--mobile-safe:42px}
+  #hud{padding:6px 12px}
+  #mid{padding:8px 12px;gap:8px}
+  .c{padding:10px 12px;gap:8px}
+  #bar{padding:5px 8px}
+  .pitch{height:55vh}
+  #ov>div{max-height:calc(100dvh - var(--mobile-safe) - 8px)}
+}
+
 /* ALEXOR · navegación del modo mánager y listas */
 #bar:has(.dk){flex-wrap:nowrap;justify-content:space-between;align-items:center;min-width:0}
 #bar:has(.dk) .dk{display:flex;flex:1 1 auto;min-width:0;max-width:calc(100% - 92px);overflow-x:auto;overflow-y:hidden;flex-wrap:nowrap;justify-content:flex-start;gap:3px;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
