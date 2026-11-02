@@ -240,6 +240,38 @@ img,svg,canvas,video{max-width:100%}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+/* ALEXOR · navegación del modo mánager y listas */
+#bar:has(.dk){flex-wrap:nowrap;justify-content:space-between;align-items:center;min-width:0}
+#bar:has(.dk) .dk{display:flex;flex:1 1 auto;min-width:0;max-width:calc(100% - 92px);overflow-x:auto;overflow-y:hidden;flex-wrap:nowrap;justify-content:flex-start;gap:3px;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+#bar:has(.dk) .dk::-webkit-scrollbar{display:none}
+#bar:has(.dk) .dk button{flex:0 0 auto;white-space:nowrap;min-width:42px}
+#bar:has(.dk) .ct{flex:0 0 auto;align-items:center}
+.fr{min-width:0}
+.fr>span{min-width:0;overflow-wrap:anywhere}
+.fr>.row{min-width:0;flex-wrap:wrap}
+.ph-w{min-width:0;max-width:100%;max-height:94dvh}
+.ph-h{min-width:0}
+.ph-h b{min-width:0;overflow-wrap:anywhere}
+.ph-b{min-width:0;overscroll-behavior:contain}
+@media(max-width:600px){
+  #bar:has(.dk){padding-left:6px;padding-right:6px;gap:5px}
+  #bar:has(.dk) .dk{max-width:calc(100% - 82px);padding:2px;gap:2px}
+  #bar:has(.dk) .dk button{min-width:39px;padding:7px 9px!important;font-size:12px}
+  #bar:has(.dk) .ct{gap:3px}
+  #bar:has(.dk) .ct button{padding:7px 8px!important;font-size:12px}
+  .fr{align-items:flex-start}
+  .fr>span:first-child{flex:1 1 145px}
+  .fr>span:last-child{flex:0 1 auto}
+  .ph-h{padding:8px 10px}
+  .ph-h b{font-size:17px}
+  .ph-b{padding:10px}
+}
+@media(max-width:360px){
+  #bar:has(.dk) .dk{max-width:calc(100% - 74px)}
+  #bar:has(.dk) .dk button{min-width:36px;padding:6px 7px!important}
+  #bar:has(.dk) .ct button{padding:6px 6px!important}
+}
 </style></head><body>
 <div id="app"></div><div id="ov"><div id="ovc"></div></div><div id="toast"></div><div id="nt"></div>
 <script>
