@@ -532,6 +532,18 @@ img,svg,canvas,video{max-width:100%}
 }
 
 
+
+/* FIX MÓVIL: la franja segura del sistema (z-index 29) no debe tapar la barra */
+@media(max-width:700px){
+  #bar:has(.dk){
+    position:fixed!important;
+    z-index:35!important;
+    left:0!important;
+    right:0!important;
+    bottom:var(--mobile-safe,0px)!important;
+    isolation:isolate!important;
+  }
+}
 </style></head><body>
 <div id="app"></div><div id="ov"><div id="ovc"></div></div><div id="toast"></div><div id="nt"></div>
 <script>
