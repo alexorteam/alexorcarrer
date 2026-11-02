@@ -241,6 +241,24 @@ img,svg,canvas,video{max-width:100%}
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
+/* ALEXOR · ajuste de pantallas: evitar que las vistas superen el alto disponible */
+#app{min-height:0;overflow:hidden}
+#app>.c{height:auto;min-height:0;flex:1 1 auto;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch}
+#mid{min-height:0;flex:1 1 0}
+#bar{flex:0 0 auto}
+#hud{flex:0 0 auto}
+@media(max-width:600px){
+  #app>.c{padding:12px 12px calc(58px + env(safe-area-inset-bottom,0px))}
+  #app>.c>h2{margin-bottom:4px}
+  #app>.c .card{overflow-wrap:anywhere}
+  #app>.c .row{align-items:center}
+}
+@media(max-height:650px) and (max-width:900px){
+  #app>.c{gap:8px;padding-top:8px;padding-bottom:calc(58px + env(safe-area-inset-bottom,0px))}
+  #app>.c h1{font-size:clamp(24px,6vw,30px)}
+  #app>.c h2{font-size:19px}
+}
+
 /* ALEXOR · navegación del modo mánager y listas */
 #bar:has(.dk){flex-wrap:nowrap;justify-content:space-between;align-items:center;min-width:0}
 #bar:has(.dk) .dk{display:flex;flex:1 1 auto;min-width:0;max-width:calc(100% - 92px);overflow-x:auto;overflow-y:hidden;flex-wrap:nowrap;justify-content:flex-start;gap:3px;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
