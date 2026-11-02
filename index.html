@@ -241,6 +241,41 @@ img,svg,canvas,video{max-width:100%}
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
+/* ALEXOR · barra de controles elevada y franja negra para la insignia */
+@media(max-width:700px){
+  body::after{
+    content:"";
+    position:fixed;
+    z-index:7;
+    left:0;right:0;bottom:0;
+    height:54px;
+    background:#000;
+    pointer-events:none;
+  }
+  #bar{
+    position:fixed;
+    z-index:8;
+    left:50%;
+    bottom:54px;
+    transform:translateX(-50%);
+    width:min(100%,720px);
+    box-sizing:border-box;
+    padding:7px 10px calc(7px + env(safe-area-inset-bottom,0px));
+    background:var(--cd);
+    border-top:1px solid var(--bd);
+    border-radius:16px 16px 0 0;
+    box-shadow:0 -3px 12px rgba(0,0,0,.22);
+  }
+  #app{padding-bottom:112px;box-sizing:border-box}
+  #app>#mid{padding-bottom:18px}
+  #app>.c{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
+  #ov{z-index:10}
+}
+@media(max-width:390px){
+  body::after{height:58px}
+  #bar{bottom:58px;width:100%;padding-left:7px;padding-right:7px}
+}
+
 /* ALEXOR · móvil: vistas desplazables y espacio para la insignia de Netlify */
 @media(max-width:700px){
   html,body{width:100%;max-width:100%;overflow-x:hidden}
