@@ -1364,3 +1364,38 @@ const _mt13=mgTab;mgTab=function(X){const T=S.M.tab;return NT[T]?NT[T](X):_mt13(
 const _mg12=mg;mg=function(m){_mg12(m);const d=$('.dk');if(d)d.insertAdjacentHTML('beforeend',[['c','🌱'],['o','🔍'],['d','🏛️'],['f','💰']].map(x=>`<button class='${S.M.tab==x[0]?'on':''}' onclick='S.M.tab=\"${x[0]}\";mg()'>${x[1]}</button>`).join(''))};
 
 </script></body></html>
+<style>
+
+/* Corrección menú móvil: botones visibles y distribuidos en varias filas */
+@media(max-width:700px){
+  #bar:has(.dk){
+    position:fixed;left:0;right:0;bottom:var(--mobile-safe);
+    display:flex;flex-direction:column;flex-wrap:nowrap;
+    align-items:stretch;justify-content:center;gap:7px;
+    padding:8px 9px;box-sizing:border-box;
+  }
+  #bar:has(.dk) .dk{
+    display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+    flex:0 0 auto;width:100%;max-width:100%;min-width:0;
+    overflow:visible;justify-content:stretch;gap:5px;
+  }
+  #bar:has(.dk) .dk button{
+    display:flex;align-items:center;justify-content:center;
+    width:100%;min-width:0;max-width:100%;
+    min-height:38px;padding:6px 3px!important;
+    font-size:15px!important;white-space:nowrap;
+  }
+  #bar:has(.dk) .ct{
+    display:flex;flex:0 0 auto;width:100%;
+    justify-content:center;gap:8px;
+  }
+  #bar:has(.dk) .ct button{min-height:36px;padding:6px 12px!important}
+  #mid{padding-bottom:190px}
+  .c{padding-bottom:190px}
+}
+@media(max-width:380px){
+  #bar:has(.dk) .dk{grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+  #bar:has(.dk) .dk button{min-height:36px;font-size:14px!important}
+}
+
+</style>
