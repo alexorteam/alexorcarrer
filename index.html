@@ -163,6 +163,83 @@ body.env-cl:after,body.env-mun:after{content:'';position:fixed;inset:0;z-index:-
 .lr{display:flex;justify-content:space-around;gap:6px;margin:6px 0}.sl{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;border:0;background:rgba(255,255,255,.12);border-radius:14px;padding:6px 8px;min-width:60px;color:inherit}.sl small{font-size:10px}.wn{position:absolute;top:-6px;right:-4px;background:#dc2626;color:#fff;border-radius:8px;font-size:10px;padding:0 5px;font-style:normal}.lw{background:linear-gradient(#2f8f4e,#1f6f3a);border-radius:18px;padding:10px 6px;color:#fff}
 
 .sl small{color:#fff!important;text-shadow:0 1px 2px #000;font-weight:700}
+
+/* ALEXOR · responsive pass 1 (sin tocar lógica ni guardado) */
+html{min-height:100%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{min-width:320px;min-height:100dvh;overflow-x:hidden}
+#app{width:100%;min-height:100dvh;height:100dvh;min-width:0}
+#mid,.c,#ov>div,.ph-w,.pr-w{min-width:0;overscroll-behavior:contain}
+#mid{min-height:0;padding-left:clamp(10px,2.5vw,18px);padding-right:clamp(10px,2.5vw,18px)}
+.c{height:100%;padding:clamp(12px,3vw,20px);padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+.row{min-width:0;flex-wrap:wrap}
+.row>.sp{min-width:0}
+.card,.hero,.cl{min-width:0;max-width:100%}
+button,select,input,textarea{max-width:100%;touch-action:manipulation}
+button{min-height:40px}
+input,select,textarea{font-size:16px}
+#bar{padding:7px max(8px,env(safe-area-inset-right,0px)) calc(7px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px));flex-wrap:wrap;align-items:center}
+#bar>div{min-width:0;max-width:100%;flex-wrap:wrap;justify-content:center}
+#bar button{min-height:42px;white-space:normal}
+#ov{padding-top:env(safe-area-inset-top,0px);align-items:flex-end}
+#ov>div{width:min(100%,720px);max-height:94dvh;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px));overscroll-behavior:contain}
+table{display:block;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;white-space:nowrap}
+td,th{padding:8px 7px}
+img,svg,canvas,video{max-width:100%}
+.g{min-width:0}
+.tabs{flex-wrap:wrap}
+.tabs button{min-width:90px}
+.ng{grid-template-columns:repeat(auto-fit,minmax(34px,1fr))}
+.apps{grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,4vw,20px) 6px}
+.app{min-width:0}
+.app i{width:clamp(48px,15vw,58px);height:clamp(48px,15vw,58px)}
+#pitch{max-width:100%;margin-left:8px;margin-right:8px}
+#mp{max-width:calc(100vw - 20px);max-height:55dvh;overflow-y:auto}
+@media(max-width:600px){
+  body{font-size:14px}
+  h1{font-size:clamp(25px,7vw,32px)}
+  h2{font-size:clamp(19px,5.5vw,22px)}
+  #hud{padding:10px 12px;gap:8px}
+  #hud b{font-size:16px}
+  #hr b{font-size:19px}
+  #mid{gap:8px;padding-top:9px;padding-bottom:12px}
+  .card{padding:10px;border-radius:13px}
+  .g{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .g div{padding:9px 5px}
+  .g b{font-size:19px}
+  .cl{gap:8px;padding:10px}
+  #bar{gap:6px}
+  #bar>div{gap:5px}
+  #bar button{padding:8px 9px;font-size:13px}
+  .dk{gap:2px}
+  .dk button{padding:7px 8px!important;font-size:12px}
+  .pitch{height:clamp(260px,75vw,350px)}
+  .pf{height:clamp(125px,40vw,150px)}
+  .ph-w{max-width:100vw}
+  .pr-wall{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:380px){
+  #hud{padding:8px 9px}
+  #bar{padding-left:5px;padding-right:5px}
+  #bar button{padding:7px 7px;font-size:12px}
+  #bar>div{gap:3px}
+  .row{gap:8px}
+  .apps{padding:16px 8px}
+  .app{font-size:10px}
+}
+@media(orientation:landscape) and (max-height:520px){
+  #app{height:100dvh}
+  #hud{padding:5px 12px}
+  #mid{padding-top:6px;padding-bottom:6px}
+  #bar{padding-top:4px;padding-bottom:4px}
+  #ov>div{max-height:96dvh}
+}
+@media(min-width:900px){
+  #app{max-width:980px}
+  #mid{padding:18px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
 </style></head><body>
 <div id="app"></div><div id="ov"><div id="ovc"></div></div><div id="toast"></div><div id="nt"></div>
 <script>
