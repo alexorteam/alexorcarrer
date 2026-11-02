@@ -556,14 +556,67 @@ const AV3={},AVS=['Corto','Largo','Afro','Calvo','Moño','Cresta','Rizos','Colet
 function load3(cb){if(window.THREE)return cb();const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';s.onload=()=>cb();s.onerror=()=>cb();document.head.appendChild(s)}
 function ens3(){if(AV3.r)return true;try{const T=THREE,cv=document.createElement('canvas'),r=new T.WebGLRenderer({canvas:cv,antialias:true,alpha:true});r.setPixelRatio(Math.min(window.devicePixelRatio||1,2));const sc=new T.Scene(),cm=new T.PerspectiveCamera(32,1,.1,50);cm.position.set(0,1.6,7.4);cm.lookAt(0,1.6,0);sc.add(new T.AmbientLight(0xffffff,.75));const d=new T.DirectionalLight(0xffffff,.9);d.position.set(3,5,5);sc.add(d);const g=new T.Group();sc.add(g);let x=0,dr=0;cv.addEventListener('pointerdown',e=>{dr=1;x=e.clientX});addEventListener('pointerup',()=>dr=0);cv.addEventListener('pointermove',e=>{if(dr){g.rotation.y+=(e.clientX-x)*.012;x=e.clientX}});Object.assign(AV3,{cv,r,sc,cm,g,d:()=>dr});return true}catch(e){return false}}
 function an3(){const A=AV3;if(!document.body.contains(A.cv)){A.run=0;return}A.run=1;const w=A.cv.clientWidth,h=A.cv.clientHeight;if(w&&(A.w!=w||A.h!=h)){A.w=w;A.h=h;A.r.setSize(w,h,false);A.cm.aspect=w/h;A.cm.updateProjectionMatrix()}if(!A.d())A.g.rotation.y+=.01;A.r.render(A.sc,A.cm);requestAnimationFrame(an3)}
-function rb3(){const T=THREE,g=AV3.g,a=SU.ch,k=a.st||0,h=a.hr;while(g.children.length){const c=g.children[0];g.remove(c);if(c.geometry)c.geometry.dispose();if(c.material)c.material.dispose()}
-const M=c=>new T.MeshStandardMaterial({color:c,roughness:.65}),ad=(geo,c,x,y,z,s)=>{const m=new T.Mesh(geo,M(c));m.position.set(x,y,z);if(s)m.scale.set(s[0],s[1],s[2]);g.add(m);return m},SP=r=>new T.SphereGeometry(r,24,16),B=(x,y,z)=>new T.BoxGeometry(x,y,z),Cy=(p,q,l)=>new T.CylinderGeometry(p,q,l,20);
-[-1,1].forEach(s=>{ad(B(.34,.18,.5),'#111111',s*.22,.09,.08);ad(Cy(.14,.15,.55),a.j,s*.22,.45,0);ad(Cy(.17,.15,.45),a.s,s*.22,.9,0);ad(SP(.2),a.j,s*.52,2.02,0);const ar=ad(Cy(.12,.11,.75),a.s,s*.62,1.6,0);ar.rotation.z=-s*.15;ad(SP(.1),a.s,s*.45,2.62,0);ad(SP(.05),'#111111',s*.17,2.68,.4);ad(B(.17,.03,.03),h,s*.17,2.78,.43)});
-ad(Cy(.4,.38,.45),'#1f2937',0,1.12,0);ad(Cy(.5,.45,.95),a.j,0,1.7,0);ad(Cy(.13,.13,.2),a.s,0,2.27,0);ad(SP(.46),a.s,0,2.62,0,[1,1.08,1]);ad(SP(.06),a.s,0,2.58,.46);ad(B(.16,.025,.02),'#7a3b2e',0,2.42,.44);
-const cap=()=>{const m=new T.Mesh(new T.SphereGeometry(.5,24,16,0,Math.PI*2,0,Math.PI*.52),M(h));m.position.set(0,2.64,0);m.scale.set(1,1.1,1.02);g.add(m)};
-if(k==0||k==8)cap();else if(k==1){cap();ad(B(.95,1,.25),h,0,2.2,-.34)}else if(k==2)ad(SP(.7),h,0,2.78,-.05);else if(k==4){cap();ad(SP(.2),h,0,3.2,-.05)}else if(k==5)ad(B(.12,.3,.75),h,0,3.12,0);else if(k==6){cap();for(let i=0;i<8;i++){const t=i/8*Math.PI*2;ad(SP(.17),h,Math.cos(t)*.42,2.95,Math.sin(t)*.42)}}else if(k==7){cap();const p=ad(Cy(.08,.05,.7),h,0,2.5,-.6);p.rotation.x=.5}else if(k==9){cap();ad(B(.86,.16,.18),h,0,2.95,.38)}
-if(a.bd)ad(SP(.36),h,0,2.38,.18,[1,.7,.8])}
-function avSet(k,v){SU.ch[k]=v;CFG.av={s:SU.ch.s,hr:SU.ch.hr,j:SU.ch.j,st:SU.ch.st,bd:SU.ch.bd};ST.s('fcs',CFG);avUI()}
+function rb3(){
+const T=THREE,g=AV3.g,a=SU.ch,k=a.st||0,skin=a.s,hair=a.hr,shirt=a.j;
+while(g.children.length){const c=g.children[0];g.remove(c);if(c.geometry)c.geometry.dispose();if(c.material)c.material.dispose()}
+const mat=(c,rough=.72)=>new T.MeshStandardMaterial({color:c,roughness:rough});
+const add=(geo,c,x,y,z,scale,rot)=>{const m=new T.Mesh(geo,mat(c));m.position.set(x,y,z);if(scale)m.scale.set(...scale);if(rot)m.rotation.set(...rot);g.add(m);return m};
+const sphere=(x,y,z,s,c)=>add(new T.SphereGeometry(1,24,16),c,x,y,z,s);
+const cyl=(rt,rb,len,c,x,y,z,seg=24)=>add(new T.CylinderGeometry(rt,rb,len,seg),c,x,y,z);
+const limb=(p1,p2,r1,r2,c)=>{const v1=new T.Vector3(...p1),v2=new T.Vector3(...p2),d=new T.Vector3().subVectors(v2,v1),m=cyl(r1,r2,d.length(),c,...v1.clone().add(v2).multiplyScalar(.5).toArray());m.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),d.normalize());return m};
+const ball=(p,r,c)=>sphere(p[0],p[1],p[2],[r,r,r],c);
+// Piernas, calcetines y botas
+for(const s of [-1,1]){
+ const hip=[s*.19,1.22,0],knee=[s*.21,.72,.015],ankle=[s*.22,.25,0];
+ limb(hip,knee,.145,.115,shirt==='#111111'?'#20242c':'#252a35');
+ ball(knee,.12,'#252a35');limb(knee,ankle,.105,.075,skin);
+ cyl(.09,.09,.18,'#e8e8e8',s*.22,.22,0);
+ sphere(s*.22,.105,.105,[.14,.12,.28],'#17191e');
+ sphere(s*.22,.12,.24,[.13,.055,.12],'#252932');
+}
+// Cadera, pantalón y camiseta con volumen
+cyl(.32,.35,.38,'#20242c',0,1.24,0);
+const torso=cyl(.37,.29,.9,shirt,0,1.83,0,32);torso.scale.z=.72;
+sphere(0,2.22,0,[.37,.16,.27],shirt);
+cyl(.115,.12,.2,skin,0,2.39,0);
+// Cuello de camiseta
+cyl(.16,.16,.055,'#e9e3d8',0,2.265,.015);
+// Brazos articulados y mangas
+for(const s of [-1,1]){
+ const shoulder=[s*.39,2.08,0],elbow=[s*.53,1.69,.025],wrist=[s*.58,1.31,.06],hand=[s*.59,1.19,.09];
+ ball(shoulder,.17,shirt);
+ limb(shoulder,elbow,.125,.105,shirt);
+ ball(elbow,.105,skin);
+ limb(elbow,wrist,.09,.07,skin);
+ ball(hand,.085,skin);
+ sphere(s*.61,1.16,.12,[.045,.075,.05],skin);
+}
+// Cabeza, orejas y facciones
+sphere(0,2.72,0,[.39,.47,.34],skin);
+for(const s of [-1,1]){
+ sphere(s*.39,2.72,0,[.075,.12,.07],skin);
+ sphere(s*.145,2.78,.305,[.047,.055,.025],'#fffaf0');
+ sphere(s*.145,2.78,.329,[.022,.03,.014],'#292321');
+ sphere(s*.145,2.86,.315,[.065,.018,.025],hair);
+}
+sphere(0,2.65,.34,[.07,.09,.09],skin);
+sphere(0,2.49,.322,[.105,.018,.018],'#874c43');
+// Pelo con siluetas distintas
+const cap=()=>add(new T.SphereGeometry(.405,28,18,0,Math.PI*2,0,Math.PI*.53),hair,0,2.83,0,[1,1.08,.94]);
+if(k===0||k===8)cap();
+else if(k===1){cap();sphere(0,2.52,-.23,[.31,.42,.13],hair)}
+else if(k===2){sphere(0,2.99,-.01,[.48,.3,.4],hair);for(let i=0;i<12;i++){const t=i/12*Math.PI*2;sphere(Math.cos(t)*.34,2.96,Math.sin(t)*.28,[.13,.14,.13],hair)}}
+else if(k===3){for(let i=0;i<7;i++){const t=i/7*Math.PI*2;sphere(Math.cos(t)*.34,2.91,Math.sin(t)*.29,[.11,.13,.11],hair)}}
+else if(k===4){cap();sphere(0,3.28,-.04,[.16,.18,.16],hair)}
+else if(k===5){cap();sphere(0,3.2,.03,[.11,.25,.12],hair)}
+else if(k===6){cap();for(let i=0;i<9;i++){const t=i/9*Math.PI*2;sphere(Math.cos(t)*.35,3.02,Math.sin(t)*.29,[.13,.14,.13],hair)}}
+else if(k===7){cap();limb([0,2.91,-.25],[0,2.55,-.62],.07,.045,hair)}
+else if(k===9){cap();sphere(0,2.94,.31,[.31,.09,.12],hair)}
+if(a.bd){sphere(0,2.43,.25,[.25,.16,.12],hair);sphere(0,2.36,.2,[.18,.1,.1],hair)}
+// Detalles de equipación: dorsal, franja y cuello
+sphere(0,1.78,.267,[.035,.29,.012],'#ffffff');
+sphere(0,2.12,.268,[.11,.025,.012],'#ffffff');
+}function avSet(k,v){SU.ch[k]=v;CFG.av={s:SU.ch.s,hr:SU.ch.hr,j:SU.ch.j,st:SU.ch.st,bd:SU.ch.bd};ST.s('fcs',CFG);avUI()}
 function avUI(){const a=SU.ch,sw=(k,l)=>`<div class='card'><label>${l}</label><div class='sw'>${AVC[k].map(c=>`<button style='background:${c}' class='${a[k]==c?'on':''}' onclick='avSet("${k}","${c}")'></button>`).join('')}</div></div>`;
 V(`<div class='c'><h2>Tu avatar en 3D</h2><div class='stg' id='stg'></div><small class='mu' style='text-align:center'>Arrástralo para girarlo</small>${sw('s','Piel')}${sw('hr','Color de pelo')}${sw('j','Camiseta')}<div class='card'><label>Peinado</label><div class='hs'>${AVS.map((x,i)=>`<button class='${a.st==i?'on':''}' onclick='avSet("st",${i})'>${av({...a,st:i},44)}<small>${x}</small></button>`).join('')}</div></div><div class='card'><label>Barba</label><div class='tabs'><button class='${a.bd?'':'on'}' onclick='avSet("bd",0)'>Sin barba</button><button class='${a.bd?'on':''}' onclick='avSet("bd",1)'>Con barba</button></div></div><button class='b' onclick='s1()'>Listo</button></div>`);
 const st=$('#stg'),go3=()=>{if(window.THREE&&ens3()){st.appendChild(AV3.cv);rb3();if(!AV3.run)an3()}else st.innerHTML=`<div style='display:flex;justify-content:center;padding-top:24px'>${av(a,210,10)}</div>`};if(window.THREE)go3();else load3(go3)}
