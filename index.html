@@ -1396,3 +1396,47 @@ const _mt13=mgTab;mgTab=function(X){const T=S.M.tab;return NT[T]?NT[T](X):_mt13(
 const _mg12=mg;mg=function(m){_mg12(m);const d=$('.dk');if(d)d.insertAdjacentHTML('beforeend',[['c','🌱'],['o','🔍'],['d','🏛️'],['f','💰']].map(x=>`<button class='${S.M.tab==x[0]?'on':''}' onclick='S.M.tab=\"${x[0]}\";mg()'>${x[1]}</button>`).join(''))};
 
 </script></body></html>
+<style>
+
+/* ALEXOR · barra inferior móvil en dos filas: navegación + controles */
+@media(max-width:700px){
+  #bar:has(.dk){
+    display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;
+    align-items:stretch!important;justify-content:center!important;
+    gap:6px!important;padding:7px 8px!important;
+  }
+  #bar:has(.dk)>.dk{
+    display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    flex:0 0 auto!important;width:100%!important;max-width:100%!important;
+    min-width:0!important;overflow:visible!important;gap:4px!important;
+    justify-content:stretch!important;
+  }
+  #bar:has(.dk)>.dk button{
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    width:100%!important;min-width:0!important;max-width:100%!important;
+    min-height:38px!important;padding:6px 2px!important;font-size:14px!important;
+  }
+  #bar:has(.dk)>.ct{
+    display:flex!important;flex:0 0 auto!important;width:100%!important;
+    max-width:100%!important;min-width:0!important;overflow:visible!important;
+    align-items:center!important;justify-content:center!important;
+    flex-wrap:nowrap!important;gap:5px!important;
+  }
+  #bar:has(.dk)>.ct button{
+    display:flex!important;flex:1 1 0!important;min-width:0!important;
+    max-width:76px!important;min-height:38px!important;
+    align-items:center!important;justify-content:center!important;
+    padding:6px 2px!important;font-size:13px!important;
+  }
+  #mid{padding-bottom:150px!important}
+  .c{padding-bottom:150px!important}
+}
+@media(max-width:380px){
+  #bar:has(.dk){padding:6px 5px!important;gap:5px!important}
+  #bar:has(.dk)>.dk{gap:3px!important}
+  #bar:has(.dk)>.dk button{min-height:36px!important;font-size:13px!important}
+  #bar:has(.dk)>.ct{gap:3px!important}
+  #bar:has(.dk)>.ct button{min-height:36px!important;font-size:12px!important}
+}
+
+</style>
