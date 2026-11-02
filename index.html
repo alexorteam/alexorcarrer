@@ -241,6 +241,42 @@ img,svg,canvas,video{max-width:100%}
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
+/* ALEXOR · móvil: vistas desplazables y espacio para la insignia de Netlify */
+@media(max-width:700px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  #app{width:100%;max-width:100%;margin:0;overflow:hidden}
+  #app>.c,#mid{
+    box-sizing:border-box;
+    width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    overflow-y:auto;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+  }
+  #app>.c>* ,#mid>*{max-width:none}
+  #app>.c .card,#app>.c .hero,#app>.c .cl{max-width:100%;box-sizing:border-box}
+  #app>.c table,#mid table{min-width:560px;width:max-content;max-width:none}
+  #app>.c .tabs,#mid .tabs{max-width:100%;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:thin}
+  #app>.c .tabs button,#mid .tabs button{flex:0 0 auto}
+  #bar{
+    box-sizing:border-box;
+    padding-right: min(38vw,155px);
+    padding-bottom:calc(48px + env(safe-area-inset-bottom,0px));
+    gap:6px;
+  }
+  #bar>div{min-width:max-content}
+  #bar button{white-space:nowrap}
+  #ov{padding-bottom:calc(42px + env(safe-area-inset-bottom,0px))}
+  #ov>div{max-height:calc(100dvh - 48px);overflow:auto}
+}
+@media(max-width:390px){
+  #app>.c{padding-left:9px;padding-right:9px}
+  #bar{padding-right:145px;padding-bottom:calc(52px + env(safe-area-inset-bottom,0px))}
+  #bar button{font-size:12px;padding:7px}
+}
+
 /* ALEXOR · ajuste de pantallas: evitar que las vistas superen el alto disponible */
 #app{min-height:0;overflow:hidden}
 #app>.c{height:auto;min-height:0;flex:1 1 auto;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch}
